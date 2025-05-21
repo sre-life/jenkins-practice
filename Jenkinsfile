@@ -15,8 +15,8 @@ pipeline {
 
       steps {
 
-            sh 'javac Webapp.java'
-            sh 'java Webapp'
+            sh 'javac webapp.java'
+            sh 'java webapp'
         }
     }
 
