@@ -4,12 +4,10 @@ pipeline {
   stages {
     stage('checkout') {
       steps {
-        script{
 
-         'checkout'
+            git url: 'https://github.com/sre-life/jenkins-practice.git', branch: main
         }
-      }
     }
-    
+
   }
 }
