@@ -11,5 +11,14 @@ pipeline {
         }
     }
 
+    stage('Build Java app') {
+
+      steps {
+
+            sh 'javac web-app-java.java'
+            sh 'java HelloWorld'
+        }
+    }
+
   }
 }
