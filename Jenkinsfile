@@ -6,7 +6,7 @@ node {
         // Clona el repositorio Git.
         // Reemplaza 'tu_usuario' y 'tu_repositorio' con los datos de tu GitHub.
         // Si es privado, añade 'credentialsId: "tu-id-de-credencial-en-jenkins"'
-        git url: 'git url: https://github.com/sre-life/jenkins-practice.git', branch: 'main'
+        git url: 'https://github.com/sre-life/jenkins-practice.git', branch: 'main'
     }
     // Etapa para compilar el proyecto.
     stage('Build') {
