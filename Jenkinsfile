@@ -15,7 +15,7 @@ pipeline {
 
       steps {
 
-            sh 'javac web-app-java.java'
+            sh 'javac web-app-java'
             sh 'java HelloWorld'
         }
     }
