@@ -1,0 +1,11 @@
+// src/test/java/com/example/WebAppTest.java (o la ruta de tu paquete de pruebas)
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
+public class WebAppTest { // Renombrado de 'webapp' a 'WebAppTest' por convención
+    @Test
+    public void testGetGreeting() {
+        // Aquí llamas al método de la CLASE DE LA APLICACIÓN (WebApp), no a la clase de prueba.
+        assertEquals("Hola Mundo desde Jenkins!", WebApp.getGreeting());
+    }
+}
