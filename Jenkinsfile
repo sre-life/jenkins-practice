@@ -29,7 +29,7 @@ pipeline {
                 echo 'Ejecutando la aplicación Java...'
                 // El nombre del JAR se basa en <artifactId>-<version>.jar de tu pom.xml
                 // En este caso: jenkins-practice-app-1.0-SNAPSHOT.jar
-                sh 'java -jar target/jenkins-practice-app-1.0-SNAPSHOT.jar'
+                sh 'java -jar target/WebApp1.0-SNAPSHOT.jar'
             }
         }
     }
