@@ -2,7 +2,7 @@ package com.srelife.jenkins.practice; // El paquete debe coincidir con la ruta d
 
 public class WebApp {
     public static String getGreeting() {
-        return "Hola Mundo desde Jenkins!";
+        return "Hello Devops People this's jenkis!";
     }
 
     public static void main(String[] args) {

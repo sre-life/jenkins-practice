@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.srelife.jenkins.practice</groupId> <artifactId>jenkins-practice-app</artifactId> <version>1.0-SNAPSHOT</version> <packaging>jar</packaging> <properties>
+    <groupId>com.srelife.jenkins.practice</groupId> <artifactId>Webapp</artifactId> <version>1.0</version> <packaging>jar</packaging> <properties>
         <maven.compiler.source>1.8</maven.compiler.source> <maven.compiler.target>1.8</maven.compiler.target> <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> </properties>
 
     <dependencies>
