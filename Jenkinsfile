@@ -12,7 +12,7 @@ node {
     stage('Build') {
         echo 'Compilando el proyecto...' // Mensaje de compilación
         // Si es un proyecto Java, usarías:
-         sh 'javac webapp.java'
+         sh 'javacx webapp.java'
         // Si es un proyecto Python simple, no hay paso de "compilación" explícito.
     }
     // Etapa para ejecutar la aplicación.
