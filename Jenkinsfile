@@ -7,7 +7,7 @@ pipeline{
         stage('Build Application..'){
 
             steps{
-                sh 'Step for build application'
+                echo 'Step for build application'
             }
         }
 
@@ -15,7 +15,7 @@ pipeline{
 
             steps{
 
-                sh 'Testing for build application'
+                echo 'Testing for build application'
         }
     }
 
@@ -23,7 +23,7 @@ pipeline{
 
             steps{
                 
-                sh 'Deploying for build application'
+                echo 'Deploying for build application'
         }
      }
   } 
