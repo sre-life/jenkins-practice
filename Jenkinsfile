@@ -34,17 +34,23 @@ pipeline {
         }
     }
     post {
+        // Combinamos los bloques 'always' para evitar duplicados.
+        // Las acciones en 'always' se ejecutan siempre, sin importar el resultado del pipeline.
         always {
             echo 'Pipeline finalizado.'
+            // Publica los resultados de las pruebas unitarias.
+            // Requiere el plugin 'JUnit Plugin' instalado en Jenkins.
+            // Busca los archivos XML generados por Maven Surefire Plugin en el espacio de trabajo.
+            // El patrón '**/*.xml' busca cualquier archivo XML en cualquier subdirectorio.
+            // Para Maven, los reportes están en 'target/surefire-reports/'.
+            junit '**/target/surefire-reports/*.xml'
         }
+        // Estas condiciones se ejecutan solo si el pipeline tiene el estado correspondiente.
         success {
             echo '¡Pipeline ejecutado con éxito!'
         }
         failure {
             echo 'El pipeline falló. Revisa los logs.'
-        }
-        always { // Publica los resultados de las pruebas incluso si fallan
-            junit '**/target/surefire-reports/*.xml'
         }
     }
 }
