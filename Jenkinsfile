@@ -16,7 +16,16 @@ pipeline {
       steps {
 
             sh 'javac webapp.java'
+            
+        }
+    }
+
+    stage('Post') {
+
+      steps {
+
             sh 'java webapp'
+            
         }
     }
 
