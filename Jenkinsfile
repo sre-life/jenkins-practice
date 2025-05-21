@@ -17,10 +17,17 @@ node {
     }
     // Etapa para ejecutar la aplicación.
     stage('Run Application') {
-        sh 'javax webapp' // Ejecuta el script Python 'hello.py'
+        sh 'java webapp' // Ejecuta el script Python 'hello.py'
         // Si es un proyecto Java, usarías:
         // sh 'java HelloWorld'
     }
+
+     stage('post') {
+        echo2 'failed' // Ejecuta el script Python 'hello.py'
+        // Si es un proyecto Java, usarías:
+        // sh 'java HelloWorld'
+    }
+
     // En la sintaxis Scripted, las acciones post-build (como notificaciones)
     // a menudo se manejan con bloques 'try-catch-finally' o pasos específicos.
     // Por ejemplo:
