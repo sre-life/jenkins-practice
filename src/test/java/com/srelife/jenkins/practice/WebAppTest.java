@@ -7,6 +7,6 @@ public class WebAppTest {
     @Test
     public void testGetGreeting() {
         // Llama al método de la clase de la aplicación (WebApp) para probarlo
-        assertEquals("Hola Mundo desde Jenkins!", WebApp.getGreeting());
+        assertEquals("Hello Devops People since Jenkins", WebApp.getGreeting());
     }
 }
