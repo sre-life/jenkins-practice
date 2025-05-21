@@ -10,10 +10,6 @@ pipeline {
         }
       }
     }
-    stage('hello Devops') {
-      steps {
-        sh 'python3 helloworld.py'
-      }
-    }
+    
   }
 }
