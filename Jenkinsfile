@@ -2,7 +2,7 @@
 pipeline {
     agent any
     tools {
-        maven 'M3_HOME' // Asegúrate de que 'M3_HOME' esté configurado en Jenkins Global Tool Configuration
+        maven 'maven3' // Asegúrate de que 'M3_HOME' esté configurado en Jenkins Global Tool Configuration
     }
 
     stages {
