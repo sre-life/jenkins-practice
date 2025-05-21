@@ -1,30 +1,19 @@
-pipeline{
+pipeline {
+  agent any
+ 
+  stages {
+    stage('checkout') {
+      steps {
+        script{
 
-    agent any
-
-    stages{
-
-        stage('Build Application..'){
-
-            steps{
-                echo 'Step for build application'
-            }
+         'checkout'
         }
-
-         stage('Test Application..'){
-
-            steps{
-
-                echo 'Testing for build application'
-        }
+      }
     }
-
-     stage('Deploy Application..'){
-
-            steps{
-                
-                echo 'Deploying for build application'
-        }
-     }
-  } 
+    stage('hello Devops') {
+      steps {
+        sh 'python3 helloworld.py'
+      }
+    }
+  }
 }
