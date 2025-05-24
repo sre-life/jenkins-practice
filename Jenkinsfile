@@ -40,12 +40,27 @@ pipeline {
             }
         }
 
+        stage('Stop and Remove Old Container') {
+        steps {
+            script {
+                echo 'Deteniendo y eliminando el contenedor antiguo si existe...'
+                // Verificar si el contenedor 'myapp' está corriendo o existe (detenido)
+                def containerExists = sh(script: "docker ps -a --format '{{.Names}}' | grep -q myapp", returnStatus: true)
+
+                if (containerExists == 0) { // grep -q devuelve 0 si encuentra el nombre
+                    echo 'Contenedor antiguo "myapp" encontrado. Deteniendo y eliminando...'
+                    sh 'docker stop myapp || true' // '|| true' para que no falle si ya está detenido
+                    sh 'docker rm myapp || true'   // '|| true' para que no falle si ya no existe después del stop
+                } else {
+                    echo 'Contenedor antiguo "myapp" no encontrado. Continuando...'
+                }
+            }
+        }
+    }
+
         stage('Docker run') {
             steps {
-                echo 'Borrando aplicacion de docker si existe'
-                sh 'docker stop myapp'
-                sh 'docker rm myapp'
-                echo 'Imagen de docker ( myapp ) deliminada'
+              
                 echo 'Corriendo applicacion Docker..'
                 // Asume que Docker está instalado y configurado en el agente de Jenkins.
                 // Usa el nombre del artefacto y la versión de tu pom.xml para el tag.
