@@ -10,3 +10,4 @@ public class WebAppTest {
         assertEquals("Hello Devops People this's jenkis!", WebApp.getGreeting());
     }
 }
+
