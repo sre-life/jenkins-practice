@@ -32,8 +32,8 @@ pipeline {
                 // Asume que Docker está instalado y configurado en el agente de Jenkins.
                 // Usa el nombre del artefacto y la versión de tu pom.xml para el tag.
                 // El '.' al final indica que el Dockerfile está en el directorio actual.
-                sh 'docker build -t sre-life/target/Webapp-1.0 .'
-                echo 'Imagen Docker construida: sre-life/target/Webapp-1.0'
+                sh 'docker build -t sre-life/target/webapp-1.0 .'
+                echo 'Imagen Docker construida: sre-life/target/webapp-1.0'
                 // Opcional: Si quieres subirla a Docker Hub (necesitarías docker login en Jenkins):
                 // sh 'docker push sre-life/jenkins-practice-app:1.0-SNAPSHOT'
             }
@@ -45,7 +45,7 @@ pipeline {
                 echo 'Ejecutando la aplicación Java...'
                 // El nombre del JAR se basa en <artifactId>-<version>.jar de tu pom.xml
                 // En este caso: jenkins-practice-app-1.0-SNAPSHOT.jar
-                sh 'java -jar target/Webapp-1.0.jar'
+                sh 'java -jar target/webapp-1.0.jar'
             }
         }
     }
