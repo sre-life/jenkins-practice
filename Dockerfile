@@ -13,4 +13,5 @@ COPY target/webapp-1.0.jar .
 
 # Comando para ejecutar la aplicación cuando el contenedor se inicie
 CMD ["java", "-jar", "webapp-1.0.jar"]
+CMD ["sleep","1d"]
 
