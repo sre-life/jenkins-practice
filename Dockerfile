@@ -12,5 +12,5 @@ COPY target/webapp-1.0.jar
 # EXPOSE 8080
 
 # Comando para ejecutar la aplicación cuando el contenedor se inicie
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-jar", "webapp-1.0.jar"]
 
