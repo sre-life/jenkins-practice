@@ -42,6 +42,10 @@ pipeline {
 
         stage('Docker run') {
             steps {
+                echo 'Borrando aplicacion de docker si existe'
+                sh 'docker stop myapp'
+                sh 'docker rm myapp'
+                echo 'Imagen de docker ( myapp ) deliminada'
                 echo 'Corriendo applicacion Docker..'
                 // Asume que Docker está instalado y configurado en el agente de Jenkins.
                 // Usa el nombre del artefacto y la versión de tu pom.xml para el tag.
