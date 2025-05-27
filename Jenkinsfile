@@ -32,8 +32,8 @@ pipeline {
              sh 'docker build -t francistv/webapp:1.0 .'
              echo 'Imagen Docker construida: francistv/webapp:1.0'
              // Las líneas de push comentadas aquí son redundantes, ya que tienes una etapa 'Push Docker Image to Docker Hub' separada
-         }
-       }
+             }
+            }
 
         stage('Stop and Remove Old Container') {
         steps {
@@ -76,7 +76,7 @@ pipeline {
                     withDockerRegistry(credentialsId: 'DOCKER_HUB_CREDS', url: 'https://index.docker.io/v1/') {
                         echo 'Autenticación con Docker Hub realizada automáticamente.'
 
-                        echo 'Subiendo la imagen a Docker Hub...'
+                        echo 'Empujando la imagen a Docker Hub...'
                         // Asegúrate de que este nombre y tag coincidan con el de la etapa 'Build Docker Image'
                         sh "docker push francistv/webapp:1.0"
 
