@@ -76,9 +76,9 @@ pipeline {
                     withDockerRegistry(credentialsId: 'DOCKER_HUB_CREDS', url: 'https://index.docker.io/v1/') {
                         echo 'Autenticación con Docker Hub realizada automáticamente.'
 
-                        echo 'Empujando la imagen a Docker Hub...'
+                        echo 'Subiendo la imagen a Docker Hub...'
                         // Asegúrate de que este nombre y tag coincidan con el de la etapa 'Build Docker Image'
-                        sh "docker push francistv/webapp:1.0"
+                        sh "docker push francistv/webapp:1.0:latest"
 
                         echo 'Desconexión de Docker Hub realizada automáticamente.'
                     }
