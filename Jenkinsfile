@@ -25,20 +25,15 @@ pipeline {
             }
         }
 
-          // NUEVA ETAPA: Construir Imagen Docker
-        stage('Build Docker Image') {
-            steps {
-                echo 'Construyendo la imagen Docker...'
-                // Asume que Docker está instalado y configurado en el agente de Jenkins.
-                // Usa el nombre del artefacto y la versión de tu pom.xml para el tag.
-                // El '.' al final indica que el Dockerfile está en el directorio actual.
-                sh 'docker build -t sre-life/target/webapp-1.0 .'
-                echo 'Imagen Docker construida: sre-life/target/webapp-1.0'
-                // Opcional: Si quieres subirla a Docker Hub (necesitarías docker login en Jenkins):
-                // sh 'docker push sre-life/jenkins-practice-app:1.0-SNAPSHOT'
-                
-            }
-        }
+         stage('Build Docker Image') {
+             steps {
+             echo 'Construyendo la imagen Docker...'
+             // *** CORRECCIÓN CRÍTICA AQUÍ: El nombre de la imagen debe ser 'francistv/webapp:1.0' ***
+             sh 'docker build -t francistv/webapp:1.0 .'
+             echo 'Imagen Docker construida: francistv/webapp:1.0'
+             // Las líneas de push comentadas aquí son redundantes, ya que tienes una etapa 'Push Docker Image to Docker Hub' separada
+         }
+       }
 
         stage('Stop and Remove Old Container') {
         steps {
@@ -73,24 +68,23 @@ pipeline {
             }
         }
 
-          stage('Push Docker Image to Docker Hub') {
+         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    withCredentials([usernameAndPassword(credentialsId: 'DOCKER_HUB_CREDS', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                        echo 'Iniciando sesión en Docker Hub...'
-                        sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
+                    // *** ESTE ES EL CAMBIO CLAVE QUE DEBE ESTAR AQUI ***
+                    // Utiliza withDockerRegistry para la autenticación
+                    withDockerRegistry(credentialsId: 'DOCKER_HUB_CREDS', url: 'https://index.docker.io/v1/') {
+                        echo 'Autenticación con Docker Hub realizada automáticamente.'
 
                         echo 'Empujando la imagen a Docker Hub...'
-                        // *** CAMBIO AQUI: Nombre de imagen 'webapp' ***
-                        sh "docker push francistv/webapp-1.0"
+                        // Asegúrate de que este nombre y tag coincidan con el de la etapa 'Build Docker Image'
+                        sh "docker push francistv/webapp:1.0"
 
-                        echo 'Cerrando sesión de Docker Hub...'
-                        sh "docker logout"
+                        echo 'Desconexión de Docker Hub realizada automáticamente.'
                     }
                 }
             }
         }
-
         stage('Run Application') {
             steps {
                 echo 'Ejecutando la aplicación Java...'
