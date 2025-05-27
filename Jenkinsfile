@@ -60,8 +60,8 @@ pipeline {
                 // Asume que Docker está instalado y configurado en el agente de Jenkins.
                 // Usa el nombre del artefacto y la versión de tu pom.xml para el tag.
                 // El '.' al final indica que el Dockerfile está en el directorio actual.
-                sh 'docker run --name myapp -d sre-life/target/webapp'
-                echo 'Imagen Docker running: sre-life/target/webapp'
+                sh 'docker run --name myapp -d sre-life/target/webapp-1.0'
+                echo 'Imagen Docker running: sre-life/target/webapp-1.0'
                 // Opcional: Si quieres subirla a Docker Hub (necesitarías docker login en Jenkins):
                 // sh 'docker push sre-life/jenkins-practice-app:1.0-SNAPSHOT'
                 
