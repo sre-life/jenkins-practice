@@ -73,20 +73,24 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image to Docker Hub') {
+         stage('Push Docker Image to Docker Hub') {
             steps {
-              // Log in to Docker Hub
-              script {
-                withDocker {
-                  withCredentials([string(credentialsId: 'DOCKER_HUB_CREDS', variable: 'DOCKER_HUB_PASSWORD')]) {
-                    sh "docker login -u francistv -p ${DOCKER_HUB_PASSWORD} https://hub.docker.com/repositories/francistv/webapp-1.0"
-                    sh "docker push francistv/webapp-1.0:latest"
-                    sh "docker logout"
-                  }
+                script {
+                    withCredentials([string(credentialsId: 'DOCKER_HUB_CREDS', variable: 'DOCKER_HUB_PASSWORD')]) {
+                        echo 'Iniciando sesión en Docker Hub...'
+                        // Correcto: login sin URL específica o con 'docker.io'
+                        sh "docker login -u francistv -p ${DOCKER_HUB_PASSWORD}"
+
+                        echo 'Empujando la imagen a Docker Hub...'
+                        // El nombre de la imagen y el tag deben coincidir exactamente con la que construiste
+                        sh "docker push francistv/webapp-1.0p:1.0"
+
+                        echo 'Cerrando sesión de Docker Hub...'
+                        sh "docker logout"
+                    }
                 }
-              }
             }
-          }
+        }
 
         stage('Run Application') {
             steps {
