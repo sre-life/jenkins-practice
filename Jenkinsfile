@@ -73,20 +73,20 @@ pipeline {
             }
         }
 
-         stage('Push Docker Image to Docker Hub') {
-      steps {
-        // Log in to Docker Hub
-        script {
-          withDocker {
-            withCredentials([string(credentialsId: 'DOCKER_HUB_CREDS', variable: 'DOCKER_HUB_PASSWORD')]) {
-              sh "docker login -u francistv -p ${DOCKER_HUB_PASSWORD} https://hub.docker.com/repositories/francistv/webapp-1.0"
-              sh "docker push francistv/webapp-1.0:latest"
-              sh "docker logout"
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+              // Log in to Docker Hub
+              script {
+                withDocker {
+                  withCredentials([string(credentialsId: 'DOCKER_HUB_CREDS', variable: 'DOCKER_HUB_PASSWORD')]) {
+                    sh "docker login -u francistv -p ${DOCKER_HUB_PASSWORD} https://hub.docker.com/repositories/francistv/webapp-1.0"
+                    sh "docker push francistv/webapp-1.0:latest"
+                    sh "docker logout"
+                  }
+                }
+              }
             }
           }
-        }
-      }
-    }
 
         stage('Run Application') {
             steps {
