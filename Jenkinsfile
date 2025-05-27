@@ -38,16 +38,16 @@ pipeline {
         stage('Stop and Remove Old Container') {
         steps {
             script {
-                echo 'Deteniendo y eliminando el contenedor antiguo si existe...'
+                echo 'Deteniendo y eliminando el contenedor desactualizado si existe...'
                 // Verificar si el contenedor 'myapp' está corriendo o existe (detenido)
                 def containerExists = sh(script: "docker ps -a --format '{{.Names}}' | grep -q myapp", returnStatus: true)
 
                 if (containerExists == 0) { // grep -q devuelve 0 si encuentra el nombre
-                    echo 'Contenedor antiguo "myapp" encontrado. Deteniendo y eliminando...'
+                    echo 'Contenedor desactualizado "myapp" encontrado. Deteniendo y eliminando...'
                     sh 'docker stop myapp || true' // '|| true' para que no falle si ya está detenido
                     sh 'docker rm myapp || true'   // '|| true' para que no falle si ya no existe después del stop
                 } else {
-                    echo 'Contenedor antiguo "myapp" no encontrado. Continuando...'
+                    echo 'Contenedor desactualizado "myapp" no encontrado. Continuando...'
                 }
             }
         }
