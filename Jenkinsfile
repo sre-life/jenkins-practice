@@ -30,7 +30,7 @@ pipeline {
              echo 'Construyendo la imagen Docker...'
              // *** CORRECCIÓN CRÍTICA AQUÍ: El nombre de la imagen debe ser 'francistv/webapp:1.0' ***
              sh 'docker build -t francistv/webapp-1.0:latest'
-             echo 'Imagen Docker construida: francistv/webapp-1.0:latest'
+             echo 'Imagen Docker construida: francistv/webapp:1.0'
              // Las líneas de push comentadas aquí son redundantes, ya que tienes una etapa 'Push Docker Image to Docker Hub' separada
          }
        }
@@ -60,8 +60,8 @@ pipeline {
                 // Asume que Docker está instalado y configurado en el agente de Jenkins.
                 // Usa el nombre del artefacto y la versión de tu pom.xml para el tag.
                 // El '.' al final indica que el Dockerfile está en el directorio actual.
-                sh 'docker run --name myapp -d sre-life/target/webapp-1.0'
-                echo 'Imagen Docker running: sre-life/target/webapp-1.0'
+                sh 'docker run --name myapp -d sre-life/target/webapp'
+                echo 'Imagen Docker running: sre-life/target/webapp'
                 // Opcional: Si quieres subirla a Docker Hub (necesitarías docker login en Jenkins):
                 // sh 'docker push sre-life/jenkins-practice-app:1.0-SNAPSHOT'
                 
@@ -78,7 +78,7 @@ pipeline {
 
                         echo 'Subiendo la imagen a Docker Hub...'
                         // Asegúrate de que este nombre y tag coincidan con el de la etapa 'Build Docker Image'
-                        sh "docker push francistv/webapp-1.0:latest"
+                        sh "docker push francistv/webapp:1.0"
 
                         echo 'Desconexión de Docker Hub realizada automáticamente.'
                     }
