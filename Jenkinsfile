@@ -86,7 +86,7 @@ pipeline {
                         echo 'Empujando la imagen a Docker Hub...'
                         // Asegúrate de que el nombre de la imagen y el tag coincidan exactamente
                         // con la imagen que construiste.
-                        sh "docker push francistv/jenkins-practice-app:1.0-SNAPSHOT"
+                        sh "docker push francistv/webapp-1.0"
 
                         echo 'Desconexión de Docker Hub realizada automáticamente.'
                     }
