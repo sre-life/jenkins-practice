@@ -29,8 +29,8 @@ pipeline {
              steps {
              echo 'Construyendo la imagen Docker...'
              // *** CORRECCIÓN CRÍTICA AQUÍ: El nombre de la imagen debe ser 'francistv/webapp:1.0' ***
-             sh 'docker build -t francistv/webapp:1.0 .'
-             echo 'Imagen Docker construida: francistv/webapp:1.0:latest'
+             sh 'docker build -t francistv/webapp-1.0:latest'
+             echo 'Imagen Docker construida: francistv/webapp-1.0:latest'
              // Las líneas de push comentadas aquí son redundantes, ya que tienes una etapa 'Push Docker Image to Docker Hub' separada
          }
        }
@@ -78,7 +78,7 @@ pipeline {
 
                         echo 'Subiendo la imagen a Docker Hub...'
                         // Asegúrate de que este nombre y tag coincidan con el de la etapa 'Build Docker Image'
-                        sh "docker push francistv/webapp:1.0:latest"
+                        sh "docker push francistv/webapp-1.0:latest"
 
                         echo 'Desconexión de Docker Hub realizada automáticamente.'
                     }
