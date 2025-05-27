@@ -73,20 +73,22 @@ pipeline {
             }
         }
 
-          stage('Push Docker Image to Docker Hub') {
-            steps {
+           stage('Push Docker Image to Docker Hub') {
+             steps {
                 script {
-                    // *** CAMBIO AQUÍ: Usamos usernameAndPassword para la credencial ***
-                    withCredentials([usernameAndPassword(credentialsId: 'DOCKER_HUB_CREDS', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
-                        echo 'Iniciando sesión en Docker Hub...'
-                        // Ahora usamos DOCKER_HUB_USER y DOCKER_HUB_PASSWORD
-                        sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
+                    // *** CAMBIO AQUÍ: Usamos withDockerRegistry para la autenticación ***
+                    // Asegúrate de que 'DOCKER_HUB_CREDS' sea una credencial de tipo 'Username with password'
+                    // donde el Username es tu usuario de Docker Hub (ej. francistv)
+                    // y el Password es tu Personal Access Token (PAT) o contraseña de Docker Hub.
+                    withDockerRegistry(credentialsId: 'DOCKER_HUB_CREDS', url: 'https://index.docker.io/v1/') {
+                        echo 'Autenticación con Docker Hub realizada automáticamente.'
 
                         echo 'Empujando la imagen a Docker Hub...'
-                        sh "docker push francistv/webapp-1.0:latest"
+                        // Asegúrate de que el nombre de la imagen y el tag coincidan exactamente
+                        // con la imagen que construiste.
+                        sh "docker push francistv/jenkins-practice-app:1.0-SNAPSHOT"
 
-                        echo 'Cerrando sesión de Docker Hub...'
-                        sh "docker logout"
+                        echo 'Desconexión de Docker Hub realizada automáticamente.'
                     }
                 }
             }
