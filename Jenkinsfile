@@ -73,22 +73,19 @@ pipeline {
             }
         }
 
-           stage('Push Docker Image to Docker Hub') {
-             steps {
+          stage('Push Docker Image to Docker Hub') {
+            steps {
                 script {
-                    // *** CAMBIO AQUÍ: Usamos withDockerRegistry para la autenticación ***
-                    // Asegúrate de que 'DOCKER_HUB_CREDS' sea una credencial de tipo 'Username with password'
-                    // donde el Username es tu usuario de Docker Hub (ej. francistv)
-                    // y el Password es tu Personal Access Token (PAT) o contraseña de Docker Hub.
-                    withDockerRegistry(credentialsId: 'DOCKER_HUB_CREDS', url: 'https://index.docker.io/v1/') {
-                        echo 'Autenticación con Docker Hub realizada automáticamente.'
+                    withCredentials([usernameAndPassword(credentialsId: 'DOCKER_HUB_CREDS', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                        echo 'Iniciando sesión en Docker Hub...'
+                        sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
                         echo 'Empujando la imagen a Docker Hub...'
-                        // Asegúrate de que el nombre de la imagen y el tag coincidan exactamente
-                        // con la imagen que construiste.
+                        // *** CAMBIO AQUI: Nombre de imagen 'webapp' ***
                         sh "docker push francistv/webapp-1.0"
 
-                        echo 'Desconexión de Docker Hub realizada automáticamente.'
+                        echo 'Cerrando sesión de Docker Hub...'
+                        sh "docker logout"
                     }
                 }
             }
