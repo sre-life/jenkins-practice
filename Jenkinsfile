@@ -73,17 +73,17 @@ pipeline {
             }
         }
 
-         stage('Push Docker Image to Docker Hub') {
+          stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'DOCKER_HUB_CREDS', variable: 'DOCKER_HUB_PASSWORD')]) {
+                    // *** CAMBIO AQUÍ: Usamos usernameAndPassword para la credencial ***
+                    withCredentials([usernameAndPassword(credentialsId: 'DOCKER_HUB_CREDS', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
                         echo 'Iniciando sesión en Docker Hub...'
-                        // Correcto: login sin URL específica o con 'docker.io'
-                        sh "docker login -u francistv -p ${DOCKER_HUB_PASSWORD}"
+                        // Ahora usamos DOCKER_HUB_USER y DOCKER_HUB_PASSWORD
+                        sh "docker login -u ${DOCKER_HUB_USER} -p ${DOCKER_HUB_PASSWORD}"
 
                         echo 'Empujando la imagen a Docker Hub...'
-                        // El nombre de la imagen y el tag deben coincidir exactamente con la que construiste
-                        sh "docker push francistv/webapp-1.0p:1.0"
+                        sh "docker push francistv/webapp-1.0:latest"
 
                         echo 'Cerrando sesión de Docker Hub...'
                         sh "docker logout"
